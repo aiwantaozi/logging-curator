@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: curator-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: curator
+  template:
+    metadata:
+      labels:
+        k8s-app: curator
+    spec:
+      containers:
+      - name: curator
+        image: reg.cnrancher.com/logging/logging-curator:v0.0.1
+        args: ["sleep", "300"]
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: curator-config
+      restartPolicy: Always

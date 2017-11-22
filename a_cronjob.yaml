@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: curator
 spec:
-  schedule: 0 2 * * *
+  schedule: "0 2 * * *"
   jobTemplate:
     spec:
       template:
@@ -11,7 +11,7 @@ spec:
           containers:
           - name: curator
             image: reg.cnrancher.com/logging/logging-curator:v0.0.1
-            args: ["--config", "/etc/config/config.yml", "/etc/config/action_file.yml"]
+            command: ["curator", "--config", "/etc/config/config.yml", "/etc/config/action_file.yml"]
             volumeMounts:
               - name: config-volume
                 mountPath: /etc/config
