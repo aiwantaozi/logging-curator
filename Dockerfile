@@ -7,4 +7,3 @@ RUN apk --update add python py-setuptools py-pip && \
     rm -rf /var/cache/apk/*
 
 USER nobody:nobody
-ENTRYPOINT ["/usr/bin/curator"]
